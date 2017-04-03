@@ -372,6 +372,8 @@ spec:
         app: grafana
         component: core
     spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: adx-data-production-v1
       containers:
       - image: grafana/grafana:4.2.0
         name: grafana-core
@@ -2479,6 +2481,8 @@ spec:
         component: core
     spec:
       serviceAccountName: prometheus-k8s
+      nodeSelector:
+        cloud.google.com/gke-nodepool: adx-data-production-v1
       containers:
       - name: prometheus
         image: prom/prometheus:v1.7.0
@@ -2496,7 +2500,7 @@ spec:
             memory: 8G
           limits:
             cpu: 500m
-            memory: 12G
+            memory: 8G
         volumeMounts:
         - name: config-volume
           mountPath: /etc/prometheus
@@ -2516,13 +2520,15 @@ metadata:
   name: kube-state-metrics
   namespace: monitoring
 spec:
-  replicas: 2
+  replicas: 1
   template:
     metadata:
       labels:
         app: kube-state-metrics
     spec:
       serviceAccountName: kube-state-metrics
+      nodeSelector:
+        cloud.google.com/gke-nodepool: adx-data-production-v1
       containers:
       - name: kube-state-metrics
         image: gcr.io/google_containers/kube-state-metrics:v0.5.0

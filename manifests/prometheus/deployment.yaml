@@ -16,6 +16,8 @@ spec:
         component: core
     spec:
       serviceAccountName: prometheus-k8s
+      nodeSelector:
+        cloud.google.com/gke-nodepool: adx-data-production-v1
       containers:
       - name: prometheus
         image: prom/prometheus:v1.7.0
@@ -30,10 +32,10 @@ spec:
         resources:
           requests:
             cpu: 500m
-            memory: 500M
+            memory: 8G
           limits:
             cpu: 500m
-            memory: 500M
+            memory: 8G
         volumeMounts:
         - name: config-volume
           mountPath: /etc/prometheus
