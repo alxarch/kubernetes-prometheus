@@ -372,8 +372,8 @@ spec:
         app: grafana
         component: core
     spec:
-      nodeSelector:
-        cloud.google.com/gke-nodepool: adx-data-production-v1
+      # nodeSelector:
+      #   cloud.google.com/gke-nodepool: adx-data-production-v1
       containers:
       - image: grafana/grafana:4.2.0
         name: grafana-core
@@ -2481,8 +2481,8 @@ spec:
         component: core
     spec:
       serviceAccountName: prometheus-k8s
-      nodeSelector:
-        cloud.google.com/gke-nodepool: adx-data-production-v1
+      # nodeSelector:
+      #   cloud.google.com/gke-nodepool: adx-data-production-v1
       containers:
       - name: prometheus
         image: prom/prometheus:v1.7.0
@@ -2496,10 +2496,10 @@ spec:
           containerPort: 9090
         resources:
           requests:
-            cpu: 500m
+            cpu: 1000m
             memory: 8G
           limits:
-            cpu: 500m
+            cpu: 1000m
             memory: 8G
         volumeMounts:
         - name: config-volume
@@ -2527,8 +2527,8 @@ spec:
         app: kube-state-metrics
     spec:
       serviceAccountName: kube-state-metrics
-      nodeSelector:
-        cloud.google.com/gke-nodepool: adx-data-production-v1
+      # nodeSelector:
+      #   cloud.google.com/gke-nodepool: adx-data-production-v1
       containers:
       - name: kube-state-metrics
         image: gcr.io/google_containers/kube-state-metrics:v0.5.0
@@ -2592,7 +2592,7 @@ spec:
     protocol: TCP
   selector:
     app: kube-state-metrics
-
+    
 ---
 apiVersion: extensions/v1beta1
 kind: DaemonSet
